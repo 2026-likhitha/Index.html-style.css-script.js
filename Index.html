@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+
+<style>
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+    transition: all 0.3s ease;
+}
+
+/* LIGHT MODE */
+body{
+    background: lightgray;
+    color: black;
+}
+
+/* DARK MODE */
+body.dark{
+    background: black;
+    color: white;
+}
+
+/* HEADER */
+header{
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+body.dark header{
+    background: white;
+    color: black;
+}
+
+/* DARK MODE BUTTON */
+.toggle-btn{
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    background: white;
+    color: black;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+body.dark .toggle-btn{
+    background: black;
+    color: white;
+    border: 1px solid white;
+}
+
+/* SECTIONS */
+section{
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+
+    /* ANIMATION BASE */
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease;
+}
+
+body.dark section{
+    background: dimgray;
+}
+
+/* ACTIVE STATE (WHEN SCROLLED) */
+section.show{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* SKILLS */
+.skill{
+    display: inline-block;
+    background: black;
+    color: white;
+    padding: 6px 12px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+body.dark .skill{
+    background: white;
+    color: black;
+}
+
+/* PROJECT */
+.project{
+    border: 1px solid black;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+body.dark .project{
+    border: 1px solid white;
+}
+
+/* INPUT */
+input, textarea{
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+body.dark input,
+body.dark textarea{
+    background: black;
+    color: white;
+    border: 1px solid white;
+}
+
+/* BUTTON */
+button{
+    background: green;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover{
+    background: darkgreen;
+}
+
+/* FOOTER */
+footer{
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+body.dark footer{
+    background: white;
+    color: black;
+}
+</style>
+</head>
+
+<body>
+
+<button class="toggle-btn" onclick="toggleMode()">Dark Mode</button>
+
+<header>
+    <h1>Nethala Likhitha</h1>
+    <p>B.Tech Final Year Student | Full Stack Developer</p>
+</header>
+
+<section>
+    <h2>About Me</h2>
+    <p>I am a passionate web developer who builds clean and modern websites.</p>
+</section>
+
+<section>
+    <h2>Skills</h2>
+    <div class="skill">Python</div>
+    <div class="skill">HTML</div>
+    <div class="skill">CSS</div>
+    <div class="skill">JavaScript</div>
+</section>
+
+<section>
+    <h2>Education</h2>
+    <p>B.Tech - Chaitanya Engineering College</p>
+    <p>Intermediate - APSWR Gurukulam</p>
+    <p>SSC - APSWR School</p>
+</section>
+
+<section>
+    <h2>Projects</h2>
+
+    <div class="project">
+        <h3>Portfolio Website</h3>
+        <p>Built using HTML, CSS and JavaScript.</p>
+    </div>
+
+    <div class="project">
+        <h3>Calculator App</h3>
+        <p>Simple JavaScript project.</p>
+    </div>
+</section>
+
+<section>
+    <h2>Contact</h2>
+
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="email" id="email" placeholder="Enter Email">
+    <textarea id="message" placeholder="Enter Message"></textarea>
+
+    <button onclick="sendMessage()">Send</button>
+    <p id="msg"></p>
+</section>
+
+<footer>
+    <p>© 2026 My Portfolio</p>
+</footer>
+
+<script>
+
+/* DARK MODE */
+function toggleMode(){
+    document.body.classList.toggle("dark");
+}
+
+/* SCROLL ANIMATION */
+function revealSections(){
+    let sections = document.querySelectorAll("section");
+
+    sections.forEach(sec => {
+        let top = sec.getBoundingClientRect().top;
+        let windowHeight = window.innerHeight;
+
+        if(top < windowHeight - 100){
+            sec.classList.add("show");
+        }
+    });
+}
+
+window.addEventListener("scroll", revealSections);
+revealSections();
+
+/* FORM */
+function sendMessage(){
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let message = document.getElementById("message").value;
+
+    if(name == "" || email == "" || message == ""){
+        document.getElementById("msg").innerHTML = "Please fill all fields";
+        document.getElementById("msg").style.color = "red";
+        return;
+    }
+
+    if(!email.includes("@")){
+        document.getElementById("msg").innerHTML = "Enter valid email";
+        document.getElementById("msg").style.color = "red";
+        return;
+    }
+
+    document.getElementById("msg").innerHTML = "Message sent successfully!";
+    document.getElementById("msg").style.color = "green";
+
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("message").value = "";
+}
+
+</script>
+
+</body>
+</html>
