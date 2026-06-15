@@ -251,18 +251,30 @@ function sendMessage(){
         return;
     }
 
-    if(!email.includes("@")){
-        document.getElementById("msg").innerHTML = "Enter valid email";
+    emailjs.send(
+        "service_b96lhcb",
+        "template_1wj0kvs",
+        {
+            from_name: name,
+            from_email: email,
+            message: message
+        }
+    ).then(function(){
+
+        document.getElementById("msg").innerHTML = "Message Sent Successfully!";
+        document.getElementById("msg").style.color = "green";
+
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("message").value = "";
+
+    }).catch(function(error){
+
+        document.getElementById("msg").innerHTML = "Failed to Send!";
         document.getElementById("msg").style.color = "red";
-        return;
-    }
+        console.log(error);
 
-    document.getElementById("msg").innerHTML = "Message sent successfully!";
-    document.getElementById("msg").style.color = "green";
-
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("message").value = "";
+    });
 }
 
 </script>
