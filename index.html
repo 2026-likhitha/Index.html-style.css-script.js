@@ -215,6 +215,7 @@ body.dark footer{
 </footer>
 
 <script>
+emailjs.init("Pp4QzYVmrJCEcyzrm");
 
 /* DARK MODE */
 function toggleMode(){
@@ -273,11 +274,9 @@ function sendMessage(){
         document.getElementById("msg").innerHTML = "Failed to Send!";
         document.getElementById("msg").style.color = "red";
         console.log(error);
-
-    });
 }
 
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </body>
 </html>
